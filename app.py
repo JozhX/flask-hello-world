@@ -401,6 +401,7 @@ sql = 'SELECT count(*) FROM omniva;'
 cur.execute(sql) 
 results = cur.fetchone() 
 # results['count']
+ieraksti = str(results[0])
   
 # close the cursor and connection 
 cur.close() 
@@ -410,5 +411,5 @@ conn.close()
 
 @app.route('/')
 def hello_world():
-    my_string = '<h1 style="text-align:center">Ahoi, bebra kungs!!</h1>' + '<h2 style="text-align:center">Datubāzē ' + results[0] + ' Omniva pakomāti</h2>'
+    my_string = '<h1 style="text-align:center">Ahoi, bebra kungs!!</h1>' + '<h2 style="text-align:center">Datubāzē ' + ieraksti + ' Omniva pakomāti</h2>'
     return my_string
