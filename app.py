@@ -15,7 +15,7 @@ cur = conn.cursor()
   
 # if you already have any table or not id doesnt matter this  
 # will create a products table for you. 
-cur.execute("CREATE TABLE IF NOT EXISTS omniva (zip int(11) NOT NULL, nosaukums varchar(250) NOT NULL COLLATE 'lv_LV');") 
+cur.execute("CREATE TABLE IF NOT EXISTS omniva (zip integer NOT NULL, nosaukums varchar(250) NOT NULL COLLATE 'lv_LV');") 
 cur.execute("TRUNCATE TABLE omniva;") 
   
 # Insert some data into the table 
