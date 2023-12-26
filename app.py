@@ -26,6 +26,7 @@ def update():
     cur = cursor()
     cur.execute('UPDATE omniva SET nosaukums=%s WHERE zip=%s', (nosaukums, zip)) 
   
+    print ('Bla')
     print ('UPDATE omniva SET nosaukums=%s WHERE zip=%s', (nosaukums, zip))
     msg = 'UPDATE omniva SET nosaukums=%s WHERE zip=%s', (nosaukums, zip)
 
