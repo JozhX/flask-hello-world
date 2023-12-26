@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for 
 from includes.database_connect import db_connect, cursor
 app = Flask(__name__)
-import database_reset
+import includes.database_reset
 
 ###########################################################
 
