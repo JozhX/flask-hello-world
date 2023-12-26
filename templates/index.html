@@ -19,7 +19,7 @@
         </div>
 
         <select class="form-select shadow" onchange="getName(this)">
-            <option value="">--- Izvēlies pakomātu ---</option>
+            <option value="0">--- Izvēlies pakomātu ---</option>
             {% for row in data %} 
             <option value="{{ row[0] }}">{{ row[1] }}</option>
             {% endfor %} 

@@ -24,10 +24,10 @@ def update():
     # Update the data in the table 
     server = db_connect()
     cur = cursor()
-    cur.execute("UPDATE omniva SET nosaukums='%s' WHERE zip=%s;", (nosaukums, zip)) 
+    cur.execute("UPDATE omniva SET nosaukums=%s WHERE zip=%s;", (nosaukums, zip)) 
   
     print ('Bla')
-    print ("UPDATE omniva SET nosaukums='%s' WHERE zip=%s;", (nosaukums, zip))
+    print ("UPDATE omniva SET nosaukums=%s WHERE zip=%s;", (nosaukums, zip))
 
 
     # commit the changes 
