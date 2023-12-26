@@ -20,7 +20,7 @@ def update():
     nosaukums = request.form['nosaukums'] 
   
     # Update the data in the table 
-    cur.execute('UPDATE products SET nosaukums=%s WHERE zip=%s', (nosaukums, zip)) 
+    cur.execute('UPDATE omniva SET nosaukums=%s WHERE zip=%s', (nosaukums, zip)) 
   
     # commit the changes 
     server.commit() 
