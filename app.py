@@ -10,7 +10,7 @@ cur = cursor()
 @app.route('/')
 def main_page():
     cur.execute('SELECT zip,nosaukums FROM omniva;') 
-    pakomati = cursor.fetchall()
+    pakomati = cur.fetchall()
     cur.close()
     server.close()
     return render_template('index.html', data=pakomati)
@@ -35,7 +35,7 @@ def reset():
 
     # Create / Empty table "Omniva"
     cur.execute("CREATE TABLE IF NOT EXISTS omniva (zip integer NOT NULL, nosaukums varchar(250) NOT NULL);") 
-    cursor.execute("TRUNCATE TABLE omniva;") 
+    cur.execute("TRUNCATE TABLE omniva;") 
 
     # Insert data into the table 
     cur.execute( 
