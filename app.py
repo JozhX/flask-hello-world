@@ -15,7 +15,7 @@ def main_page():
     cur.close()
     return render_template('index.html', data=pakomati)
 
-@app.route('/update', methods=['GET']) 
+@app.route('/update', methods=['POST']) 
 def update(): 
     # Get the data from the form 
     zip = request.form['zip'] 
@@ -36,7 +36,7 @@ def update():
     server.close()
     return redirect(url_for('main_page')) 
 
-@app.route('/reset', methods=['GET'])
+@app.route('/reset', methods=['POST'])
 def reset():
     server = db_connect()
     cur = cursor()
