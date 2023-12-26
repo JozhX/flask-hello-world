@@ -24,6 +24,8 @@ def update():
   
     # commit the changes 
     server.commit() 
+    cur.close()
+    server.close()
     return redirect(url_for('index')) 
 
 @app.route('/reset', methods=['POST'])
