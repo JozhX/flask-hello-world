@@ -29,7 +29,7 @@ def update():
     server.commit() 
     cur.close()
     server.close()
-    return redirect(url_for('index')) 
+    return redirect(url_for('main_page')) 
 
 @app.route('/reset', methods=['POST'])
 def reset():
@@ -419,5 +419,5 @@ def reset():
     server.commit() 
     cur.close()
     server.close()
-    
+
     return redirect(url_for('main_page')) 
