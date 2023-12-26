@@ -1,6 +1,6 @@
 from flask import redirect, url_for 
 from __main__ import app
-from database_connect import db_connect, cursor
+from includes.database_connect import db_connect, cursor
 
 @app.route('/reset', methods=['POST'])
 def reset():

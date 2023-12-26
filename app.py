@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for 
-from database_connect import db_connect, cursor
+from includes.database_connect import db_connect, cursor
 app = Flask(__name__)
+import database_reset
 
 ###########################################################
 
@@ -27,4 +28,3 @@ def update():
     db_connect.close()
     return redirect(url_for('index')) 
 
-import database_reset
