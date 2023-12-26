@@ -11,8 +11,6 @@ cur = cursor()
 def main_page():
     cur.execute('SELECT zip,nosaukums FROM omniva;') 
     pakomati = cur.fetchall()
-    cur.close()
-    server.close()
     return render_template('index.html', data=pakomati)
 
 @app.route('/update', methods=['POST']) 
@@ -26,8 +24,6 @@ def update():
   
     # commit the changes 
     server.commit() 
-    cur.close()
-    server.close()
     return redirect(url_for('index')) 
 
 @app.route('/reset', methods=['POST'])
@@ -412,9 +408,7 @@ def reset():
     (9997, 'Brocēnu Citro pakomāts'), \
     (9998, 'Daugavpils Valkas ielas Mego pakomāts');''') 
 
-    # commit the changes and close cursor
+    # commit the changes
     server.commit() 
-    cur.close() 
-    server.close() 
 
     return redirect(url_for('main_page')) 
