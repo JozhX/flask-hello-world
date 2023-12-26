@@ -18,15 +18,15 @@ def main_page():
 @app.route('/update', methods=['POST']) 
 def update(): 
     # Get the data from the form 
-    zip = int(request.form['zip']) 
+    zip = request.form['zip'] 
     nosaukums = request.form['nosaukums'] 
   
     # Update the data in the table 
     server = db_connect()
     cur = cursor()
-    cur.execute("UPDATE omniva SET nosaukums=%s WHERE zip=%s;", (nosaukums, zip)) 
+    cur.execute("UPDATE omniva SET nosaukums=? WHERE zip=?;", (nosaukums, zip)) 
   
-    print ("UPDATE omniva SET nosaukums=%s WHERE zip=%s;", (nosaukums, zip))
+    print ("UPDATE omniva SET nosaukums=? WHERE zip=?;", (nosaukums, zip))
 
     # commit the changes 
     server.commit() 
