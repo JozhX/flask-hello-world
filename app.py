@@ -54,8 +54,6 @@ def update():
 
     # commit the changes 
     server.commit() 
-    cur.close()
-    server.close()
     return redirect(url_for('main_page')) 
 
 @app.route('/reset', methods=['POST'])
