@@ -2,14 +2,17 @@ from flask import Flask, render_template, request, redirect, url_for
 from database_connect import db_connect, cursor
 app = Flask(__name__)
 
+server = db_connect()
+cur = cursor()
+
 ###########################################################
 
 @app.route('/')
 def main_page():
-    cursor.execute('SELECT zip,nosaukums FROM omniva;') 
+    cur.execute('SELECT zip,nosaukums FROM omniva;') 
     pakomati = cursor.fetchall()
-    cursor.close()
-    db_connect.close()
+    cur.close()
+    server.close()
     return render_template('index.html', data=pakomati)
 
 @app.route('/update', methods=['POST']) 
@@ -19,23 +22,23 @@ def update():
     nosaukums = request.form['nosaukums'] 
   
     # Update the data in the table 
-    cursor.execute('UPDATE products SET nosaukums=%s WHERE zip=%s', (nosaukums, zip)) 
+    cur.execute('UPDATE products SET nosaukums=%s WHERE zip=%s', (nosaukums, zip)) 
   
     # commit the changes 
-    db_connect.commit() 
-    cursor.close()
-    db_connect.close()
+    server.commit() 
+    cur.close()
+    server.close()
     return redirect(url_for('index')) 
 
 @app.route('/reset', methods=['POST'])
 def reset():
 
     # Create / Empty table "Omniva"
-    cursor.execute("CREATE TABLE IF NOT EXISTS omniva (zip integer NOT NULL, nosaukums varchar(250) NOT NULL);") 
+    cur.execute("CREATE TABLE IF NOT EXISTS omniva (zip integer NOT NULL, nosaukums varchar(250) NOT NULL);") 
     cursor.execute("TRUNCATE TABLE omniva;") 
 
     # Insert data into the table 
-    cursor.execute( 
+    cur.execute( 
         '''INSERT INTO omniva (zip, nosaukums) VALUES \
     (9101, 'Rīgas T/C Akropole pakomāts'), \
     (9102, 'Ventspils Poruka ielas RIMI pakomāts'), \
@@ -410,8 +413,8 @@ def reset():
     (9998, 'Daugavpils Valkas ielas Mego pakomāts');''') 
 
     # commit the changes and close cursor
-    db_connect.commit() 
-    cursor.close() 
-    db_connect.close() 
+    server.commit() 
+    cur.close() 
+    server.close() 
 
     return redirect(url_for('main_page')) 
