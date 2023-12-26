@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from database_connect import db_connect, cursor
 app = Flask(__name__)
 
+msg = ''
 ###########################################################
 
 @app.route('/')
@@ -25,6 +26,8 @@ def update():
     cur = cursor()
     cur.execute('UPDATE omniva SET nosaukums=%s WHERE zip=%s', (nosaukums, zip)) 
   
+    msg = 'UPDATE omniva SET nosaukums=%s WHERE zip=%s', (nosaukums, zip)
+
     # commit the changes 
     server.commit() 
     cur.close()
