@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 from database_connect import db_connect, cursor
 app = Flask(__name__)
 
-msg = ''
+msg = 'Nekas'
 ###########################################################
 
 @app.route('/')
@@ -15,7 +15,7 @@ def main_page():
     cur.close()
     return render_template('index.html', data=pakomati)
 
-@app.route('/update', methods=['POST']) 
+@app.route('/update', methods=['GET']) 
 def update(): 
     # Get the data from the form 
     zip = request.form['zip'] 
@@ -34,7 +34,7 @@ def update():
     server.close()
     return redirect(url_for('main_page')) 
 
-@app.route('/reset', methods=['POST'])
+@app.route('/reset', methods=['GET'])
 def reset():
     server = db_connect()
     cur = cursor()
