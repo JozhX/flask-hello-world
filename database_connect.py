@@ -12,5 +12,6 @@ def db_connect():
   
 # create a cursor
 def cursor():
-    cur = db_connect.cursor()
+    connection = db_connect()
+    cur = connection.cursor()
     return cur
