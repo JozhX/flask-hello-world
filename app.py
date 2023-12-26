@@ -2,15 +2,16 @@ from flask import Flask, render_template, request, redirect, url_for
 from database_connect import db_connect, cursor
 app = Flask(__name__)
 
-server = db_connect()
-cur = cursor()
-
 ###########################################################
 
 @app.route('/')
 def main_page():
+    server = db_connect()
+    cur = cursor()
     cur.execute('SELECT zip,nosaukums FROM omniva;') 
     pakomati = cur.fetchall()
+    server.close()
+    cur.close()
     return render_template('index.html', data=pakomati)
 
 @app.route('/update', methods=['POST']) 
@@ -20,6 +21,8 @@ def update():
     nosaukums = request.form['nosaukums'] 
   
     # Update the data in the table 
+    server = db_connect()
+    cur = cursor()
     cur.execute('UPDATE omniva SET nosaukums=%s WHERE zip=%s', (nosaukums, zip)) 
   
     # commit the changes 
@@ -30,6 +33,8 @@ def update():
 
 @app.route('/reset', methods=['POST'])
 def reset():
+    server = db_connect()
+    cur = cursor()
 
     # Create / Empty table "Omniva"
     cur.execute("CREATE TABLE IF NOT EXISTS omniva (zip integer NOT NULL, nosaukums varchar(250) NOT NULL);") 
@@ -412,5 +417,7 @@ def reset():
 
     # commit the changes
     server.commit() 
-
+    cur.close()
+    server.close()
+    
     return redirect(url_for('main_page')) 
