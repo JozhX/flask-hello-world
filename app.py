@@ -3,6 +3,24 @@ from database_connect import db_connect, cursor
 app = Flask(__name__)
 
 msg = 'Nekas'
+
+def print_psycopg2_exception(err):
+    # get details about the exception
+    err_type, err_obj, traceback = sys.exc_info()
+
+    # get the line number when exception occured
+    line_num = traceback.tb_lineno
+
+    # print the connect() error
+    print ("\npsycopg2 ERROR:", err, "on line number:", line_num)
+    print ("psycopg2 traceback:", traceback, "-- type:", err_type)
+
+    # psycopg2 extensions.Diagnostics object attribute
+    print ("\nextensions.Diagnostics:", err.diag)
+
+    # print the pgcode and pgerror exceptions
+    print ("pgerror:", err.pgerror)
+    print ("pgcode:", err.pgcode, "\n")
 ###########################################################
 
 @app.route('/')
@@ -24,7 +42,13 @@ def update():
     # Update the data in the table 
     server = db_connect()
     cur = cursor()
-    cur.execute("UPDATE omniva SET nosaukums=%s WHERE zip=%s", (nosaukums, zip)) 
+
+    # catch exception for invalid SQL statement
+    try:
+        cur.execute("UPDATE omniva SET nosaukums=%s WHERE zip=%s", (nosaukums, zip)) 
+    except Exception as err:
+        # pass exception to function
+        print_psycopg2_exception(err)
   
     print ("UPDATE omniva SET nosaukums=%s WHERE zip=%s", (nosaukums, zip))
 
