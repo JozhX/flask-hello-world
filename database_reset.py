@@ -387,5 +387,6 @@ def reset():
     # commit the changes and close cursor
     db_connect.commit() 
     cursor.close() 
+    db_connect.close() 
 
     return redirect(url_for('main_page')) 
