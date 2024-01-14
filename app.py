@@ -66,6 +66,7 @@ def reset():
     # Create / Empty table "Omniva"
     cur.execute("CREATE TABLE IF NOT EXISTS omniva (zip integer NOT NULL, nosaukums varchar(250) NOT NULL);") 
     cur.execute("TRUNCATE TABLE omniva;") 
+    cur.execute("GRANT SELECT, UPDATE, INSERT, DELETE ON omniva TO admin;")
 
     # Insert data into the table 
     cur.execute( 
