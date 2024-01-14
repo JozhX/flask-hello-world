@@ -45,15 +45,14 @@ def update():
     cur = cursor()
 
     # catch exception for invalid SQL statement
-    sql_and_params = "UPDATE omniva SET nosaukums=%s WHERE zip=%s"
-    sql_vars = nosaukums, zip
+    sql_and_params = "UPDATE omniva SET nosaukums='" + nosaukums + "' WHERE zip=" + zip
     try:
-        cur.execute(sql_and_params, sql_vars) 
+        cur.execute(sql_and_params) 
     except Exception as err:
         # pass exception to function
         print_psycopg2_exception(err)
   
-    print (sql_and_params, sql_vars)
+    print (sql_and_params)
 
     # commit the changes 
     server.commit() 
