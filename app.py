@@ -442,6 +442,8 @@ def reset():
     (9997, 'Brocēnu Citro pakomāts'), \
     (9998, 'Daugavpils Valkas ielas Mego pakomāts');''') 
 
+    print ('DB reset done!')
+
     # commit the changes
     server.commit() 
     cur.close()
