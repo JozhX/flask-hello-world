@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect, url_for, sys
+from flask import Flask, render_template, request, redirect, url_for
 from database_connect import db_connect, cursor
+import sys
 app = Flask(__name__)
 
 msg = 'Nekas'
